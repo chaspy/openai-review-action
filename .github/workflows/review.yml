@@ -12,14 +12,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Get Issue comment
-        run: |
-          echo "Issue Body: ${{ github.event.issue.body }}"
-          echo "ISSUE_BODY=$ISSUE_BODY" >> $GITHUB_ENV
-        env:
-          ISSUE_BODY: ${{ github.event.issue.body }}
+      - uses: actions/github-script@v6
+        id: set-result
+        with:
+          script: |
+            echo "Issue Body: ${{ github.event.issue.body }}"
+            core.setOutput(issue-body, value)
       - name: Add comment
-        run: gh issue comment "$NUMBER" --repo "$REPO" --body "$ISSUE_BODY"
+        run: gh issue comment "$NUMBER" --repo "$REPO" --body "${{steps.set-result.outputs.issue-body}}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NUMBER: ${{ github.event.issue.number }}
