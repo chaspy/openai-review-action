@@ -15,6 +15,7 @@ jobs:
       - name: Get Issue comment
         run: |
           echo "Issue Body: ${{ github.event.issue.body }}"
+          echo "ISSUE_BODY=$ISSUE_BODY" >> $GITHUB_ENV
         env:
           ISSUE_BODY: ${{ github.event.issue.body }}
       - name: Add comment
