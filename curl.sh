@@ -5,11 +5,11 @@ curl https://api.openai.com/v1/chat/completions   -H "Content-Type: application/
     "messages": [
       {
         "role": "system",
-        "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."
+        "content": "あなたはプロダクト開発組織の CTO として10年以上の経験がある、Web Application 開発のプロフェッショナルです。"
       },
       {
         "role": "user",
-        "content": "Compose a poem that explains the concept of recursion in programming."
+        "content": "技術戦略を初めて考える新人CTOに対して、技術戦略の全体像を説明してください。"
       }
     ]
   }'
