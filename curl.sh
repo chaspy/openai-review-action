@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# escape
+body=$(printf %q "$ISSUE_BODY")
+
 curl https://api.openai.com/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $OPENAI_API_KEY" \
@@ -12,7 +15,7 @@ curl https://api.openai.com/v1/chat/completions \
         },
         {
           \"role\": \"user\",
-          \"content\": \"以降で記載する設計方針について、CTO の立場でレビューしてください。設計: ${ISSUE_BODY}\"
+          \"content\": \"以降で記載する設計方針について、CTO の立場でレビューしてください。設計: ${body}\"
         }
       ]
     }"
