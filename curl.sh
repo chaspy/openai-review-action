@@ -15,10 +15,10 @@ ret=$(curl https://api.openai.com/v1/chat/completions \
         },
         {
           \"role\": \"user\",
-          \"content\": \"以降で記載する設計方針について、CTO の立場でレビューしてください。設計: ${body}\"
+          \"content\": \"以降で記載する設計方針について、CTO の立場でレビューしてください。markdown 形式での出力でお願いします。設計: ${body}\"
         }
       ]
     }"
 )
 
-echo $ret | jq '.choices[].message.content'
+echo $ret | jq -r '.choices[].message.content'
