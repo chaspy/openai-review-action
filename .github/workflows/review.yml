@@ -7,6 +7,8 @@ on:
 jobs:
   add_comment:
     runs-on: ubuntu-latest
+    if: github.event_name == 'issue_comment' &&
+      startsWith(github.event.comment.body, '/review')
     permissions:
       issues: write
     steps:
