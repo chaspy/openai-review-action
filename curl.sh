@@ -2,6 +2,7 @@
 
 # escape
 body=$(printf %q "$ISSUE_BODY")
+output="この回答はそのまま Issue Comment として投稿されるため、markdown 形式でお願いします。見出しの前後に半角スペース2つを入れてください。"
 
 ret=$(curl https://api.openai.com/v1/chat/completions \
   -H "Content-Type: application/json" \
@@ -15,7 +16,7 @@ ret=$(curl https://api.openai.com/v1/chat/completions \
         },
         {
           \"role\": \"user\",
-          \"content\": \"以降で記載する設計方針について、CTO の立場でレビューしてください。この回答はそのまま Issue Comment として投稿されるため、markdown 形式でお願いします。改行は半角スペース2つを入れてください。設計: ${body}\"
+          \"content\": \"以降で記載する設計方針について、CTO の立場でレビューしてください。${output} 設計: ${body}\"
         }
       ]
     }"
