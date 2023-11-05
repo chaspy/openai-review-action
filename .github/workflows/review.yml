@@ -12,7 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - uses: actions/github-script@v6
+      - name: get issue body and set output
+        uses: actions/github-script@v6
         id: set-result
         with:
           script: |
