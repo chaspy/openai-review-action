@@ -17,7 +17,10 @@ jobs:
         id: set-result
         with:
           script: |
-            core.setOutput(issue-body, ${{ github.event.issue.body }})
+            const issueBody = process.env.GITHUB_EVENT_PATH
+            ? require(process.env.GITHUB_EVENT_PATH).issue.body
+            : '';
+            core.setOutput(issue-body, issueBody)
       - name: Add comment
         run: gh issue comment "$NUMBER" --repo "$REPO" --body "${{steps.set-result.outputs.issue-body}}"
         env:
