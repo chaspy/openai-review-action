@@ -15,15 +15,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: review
-        run: |
-          RESULT=$(bash curl.sh)
-          echo RESULT="$RESULT" >> $GITHUB_ENV
+        run: bash curl.sh > comment.txt
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ISSUE_BODY: ${{ github.event.issue.body }}
       - name: Add comment
         run: |
-          gh issue comment "$NUMBER" --repo "$REPO" --body "$RESULT"
+          gh issue comment "$NUMBER" --repo "$REPO" --body-file comment.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NUMBER: ${{ github.event.issue.number }}
