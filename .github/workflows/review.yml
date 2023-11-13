@@ -17,7 +17,7 @@ jobs:
       - name: review
         run: |
           RESULT=$(bash curl.sh)
-          echo RESULT=$RESULT >> $GITHUB_ENV
+          echo RESULT="$RESULT" >> $GITHUB_ENV
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ISSUE_BODY: ${{ github.event.issue.body }}
